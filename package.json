@@ -1,24 +1,67 @@
 {
-  "name": "react-app-template",
+  "name": "@tonyrizzotto/react-app-template",
+  "author": "Tony Rizzotto",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "start": "export NODE_ENV=production && node ./server",
+    "dev": "export NODE_ENV=local && nodemon ./server",
+    "lint": "eslint .",
+    "lint-fix": "eslint --fix .",
+    "build": "export NODE_ENV=production && npm run build:client && npm run build:server",
+    "build:client": "vite build --outDir dist/client --ssrManifest",
+    "build:server": "vite build --outDir dist/server --ssr /index.js",
     "preview": "vite preview"
+  },
+  "engines": {
+    "node": "^18.0.0"
+  },
+  "application": {
+    "defaultSegment": "/r",
+    "defaultLanding": "/r/",
+    "gqlRoute": "/r/graphql"
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb"
+    ]
+  },
+  "nodemonConfig": {
+    "watch": [
+      "server/"
+    ],
+    "ignore": [
+      "node_modules"
+    ],
+    "verbose": true
+  },
+  "repository": {
+    "url": "https://github.com/tonyrizzotto/react-app-template.git"
   },
   "dependencies": {
     "@fastify/static": "^6.10.0",
     "@fastify/vite": "^4.0.0",
+    "dotenv": "^16.0.3",
     "fastify": "^4.15.0",
+    "graphql": "^16.6.0",
+    "mercurius": "^12.2.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "nodemon": "^2.0.22",
+    "pino-pretty": "^10.0.0",
     "vite": "^4.2.0"
   }
 }

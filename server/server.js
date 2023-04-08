@@ -1,21 +1,42 @@
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Fastify from 'fastify';
-import fastifyStatic from '@fastify/static';
-// import FastifyVite from '@fastify/vite';
-// import { renderToString } from 'react-dom/server';
+import FastifyVite from '@fastify/vite';
+import { renderToString } from 'react-dom/server';
+import { v4 } from 'uuid';
+import api from './api/index.js';
+import loggingConfig from './utils/index.js';
 
-export default async function createServer() {
-  const server = Fastify({ logger: true });
-
-  server.register(fastifyStatic, {
-    root: join(fileURLToPath(new URL(import.meta.url)), '../../dist')
-  })
-  server.get('/d', async (request, reply) => {
-    console.log(reply)
-    await reply.sendFile('index.html')
+export default async function createServer({ environment }) {
+  const server = Fastify({
+    logger: loggingConfig[environment] || true,
+    genReqId: () => v4(),
   });
 
-  return server
-}
+  // Register entire api
+  server.register(api, {
+    prefix: '/r',
+  });
 
+  // SSR w/Vite
+  await server.register(FastifyVite, {
+    dev: environment !== 'production',
+    /*
+      `root` is pulled from the vite.config.js. `path.join` is required as @fastify/vite expects
+       your server to be in the root folder of the project, and not nested.
+     */
+    root: join(dirname(fileURLToPath(new URL(import.meta.url))), '../'),
+    createRenderFunction({ createApp }) {
+      return () => ({
+        element: renderToString(createApp()),
+      });
+    },
+  });
+
+  // Where the SSR page is available
+  server.get('/', (request, reply) => {
+    reply.html(reply.render());
+  });
+
+  return server;
+}

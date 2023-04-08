@@ -1,7 +1,14 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  root: join(dirname(fileURLToPath(new URL(import.meta.url))), 'src'),
+  plugins: [react({ jsxRuntime: 'classic' })],
+  mode: 'production',
+  build: {
+    manifest: true,
+    outDir: 'dist',
+  },
+});
