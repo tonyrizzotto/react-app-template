@@ -47,6 +47,29 @@ To start in production, simply run:
 npm start
 ```
 
+## Run in Container
+
+The included Dockerfile sets the minimum needed ENV VARS to run the application in a container. To build, simply run:
+
+```bash
+docker build -t <name_of_app> .
+```
+
+Once the image is built, you can run your application in a browser with port-forwarding. If we expose PORT=3000 in our build, we should map the container port to one accessible on our host machine.
+
+```bash
+docker run -d -p 3000:5000 <image_id>
+```
+
+With this command, we are forwarding port 5000 from the running container to port 3000 on our host machine. The application would then be viewable on: 
+
+```
+http://localhost:3000
+```
+
+#### Reminder on secrets
+Because this is the bare minimum to run an application, secrets aren't included. Any included secrets should be attached to a `.env.production`, or injected into a container depending on how you're choosing to run the container.
+
 #### Configuration
 
 For easier development, this template utlizies environment secrets with `dotenv`, which will require a `.env.NODE_ENV` file for each type of environment you'd like to utilize. This will require you to explicitly set your `NODE_ENV` either in the start command, or in the build step of a dockerfile:
