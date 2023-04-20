@@ -1,6 +1,6 @@
 # React Application Template
 
-This is a modern React Application Template that utilizes React 18, Vite, GraphQL, Fastify and SSR. `eslint` configuration is based off of `air-bnb`.
+This is a modern React Application Template that utilizes React 18, Vite, GraphQL, Fastify and SSR. `eslint` configuration is based off of `air-bnb`. This template completely integrates beautifully with Cloud Run to provide a seemless CI/CD experience. [Set up your Cloud Run Application](https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build).
 
 ## How to Use
 

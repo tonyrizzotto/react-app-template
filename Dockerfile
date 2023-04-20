@@ -20,7 +20,7 @@ RUN npm run build
 
 # Required ENV VARS for running in a container
 ENV ADDRESS=0.0.0.0
-ENV PORT=3000
+ENV PORT=8080
 
 # Start the
 CMD ["npm", "start"]
