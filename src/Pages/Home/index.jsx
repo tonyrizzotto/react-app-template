@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>Hello, this is a SSR app son!</div>;
+  return <div>Hello! Welcome to your Server-side Rendered React/Vite/Fastify Application!</div>;
 }
