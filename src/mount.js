@@ -1,5 +1,5 @@
 import { hydrateRoot } from 'react-dom/client';
-import createApp from './App';
+import createApp from './createApp';
 
 /*
   Index.html has the `/mount.js` in it's script tag.
