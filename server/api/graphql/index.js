@@ -1,6 +1,8 @@
 import MercuriusValidation from 'mercurius-validation';
 import { mergeSchemas, addResolversToSchema } from '@graphql-tools/schema';
 import { mergeResolvers } from '@graphql-tools/merge';
+
+import EnvironmentVariables from './environmentVariables/index.js';
 import Example from './example/index.js';
 
 const schemas = [];
@@ -11,6 +13,7 @@ const typeDefs = [
 
 // Add each schema module to this array
 [
+  EnvironmentVariables,
   Example,
 ].forEach(({ schema: s, typeDefs: t, resolvers: r }) => {
   if (r) resolverStack.push(r);
