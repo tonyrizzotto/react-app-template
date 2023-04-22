@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { BrowserRouter } from 'react-router-dom';
-import Routes from './routes';
+import Routes from './RoutesList';
 
 /*
   The `hydrated` prop is a sign the app has been loaded in the browser and it is

@@ -1,0 +1,8 @@
+type PublicEnv {
+  isEnabled: Boolean
+  customFlag: String
+}
+
+type Query {
+  getPublicEnvVars: PublicEnv  
+}
