@@ -35,7 +35,9 @@ export default async function createServer({ environment }) {
     },
   });
 
-  // Where the SSR page is available
+  /*
+    Renders the application via SSR
+  */
   server.get('/', (request, reply) => {
     reply.html(reply.render());
   });

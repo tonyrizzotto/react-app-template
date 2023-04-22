@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <div>
       {!loading && (
-        `${data?.hello}! Welcome to your Server-side Rendered React/Vite/Fastify Application!`
+        `${data.hello}! Welcome to your Server-side Rendered React/Vite/Fastify Application!`
       )}
     </div>
   );
