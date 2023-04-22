@@ -35,9 +35,36 @@ export default async function createServer({ environment }) {
     },
   });
 
-  // Where the SSR page is available
-  server.get('/', (request, reply) => {
-    reply.html(reply.render());
+  /*
+    Each request, we check for a custom head from the client.
+    If that header doesn't exist in the format we expect, they are directed to login.
+  */
+  server.addHook('preValidation', (request, reply, done) => {
+    const { headers } = request;
+    const auth = headers['x-user-auth'];
+
+    // If there is no auth token, redirect to login:
+    if (auth === 'my-custom-auth') {
+      request.isVerified = true;
+    } else {
+      request.isVerified = false;
+    }
+
+    done();
+  });
+
+  /*
+    Renders the application via SSR
+  */
+  server.get('/', (request, reply, done) => {
+    const { isVerified } = request;
+
+    if (!isVerified) {
+      reply.redirect('/login');
+      done();
+    } else {
+      reply.html(reply.render());
+    }
   });
 
   return server;

@@ -1,14 +1,10 @@
-import { GraphQLClient, ClientContext } from 'graphql-hooks';
+import GraphQLContext, { graphQLClient } from './contexts/graphQLContext';
 import Home from './Pages/Home';
-
-const client = new GraphQLClient({
-  url: '/r/graphql',
-});
 
 export default function createApp() {
   return (
-    <ClientContext.Provider value={client}>
+    <GraphQLContext value={graphQLClient}>
       <Home />
-    </ClientContext.Provider>
+    </GraphQLContext>
   );
 }
