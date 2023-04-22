@@ -1,7 +1,8 @@
 # React Application Template
 
-This is a modern React Application Template that utilizes React 18, Vite, GraphQL, Fastify and SSR. `eslint` configuration is based off of `air-bnb`. This template completely integrates beautifully with Cloud Run to provide a seemless CI/CD experience. [Set up your Cloud Run Application](https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build).
+This is a modern React Application Template that utilizes React 18, Vite, GraphQL, Fastify and is served via SSR. This template integrates beautifully with Google Cloud Run to provide a seemless CI/CD experience. [Set up your Cloud Run Application](https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build).
 
+The application can be viewed [here](https://react-app-template-medi3zdobq-uc.a.run.app/)
 ## How to Use
 
 After you have cloned the project with:
@@ -15,6 +16,8 @@ You should next update the `title`, `description`, `application`, and `version` 
 ```bash
 npm i
 ```
+
+The `package.json` also houses an `application` key. This is useful information to run your application. Change it to suit your needs.
 
 ### Start Locally
 
@@ -33,16 +36,14 @@ INFO: Server listening at http://127.0.0.1:3456
 A window WILL NOT open on launch. Simply click the route, or enter the URL in your browser to open up the application. While running, all changes are hot-reloaded in the browser.
 
 ### Test the app locally
-
-#### Curl
 Once running, you can `curl` a route on the server to observe Graphql working. If you start a server up on port 8080:
+
 
 ```bash
 curl http://localhost:8080/r/example?name=<your_name>
 ```
 
 You can visit the same URL in your browser to view the same result.
-
 
 
 ### Run in Production
@@ -81,10 +82,20 @@ With this command, we are forwarding port 5000 from the running container to por
 http://localhost:3000
 ```
 
-#### Reminder on secrets
-Because this is the bare minimum to run an application, secrets aren't included. Any included secrets should be attached to a `.env.production`, or injected into the container depending on how you're choosing to run it: docker, K8s, etc.
+## How to use Environment Variables
+Because this is the bare minimum to run an application, there are 2 ways you can manage your environment variables that make sense for a production-grade application. 
 
-#### Configuration
+1. Any included secrets can be attached to a `.env.production` file. Because of `dotenv` we can expose secrets easily via simple config in the [config](./config/index.js) folder.
+2. The preferred method would be to inject secrets into the running container. Google provides a [Secret Manager](https://cloud.google.com/secret-manager), which can be enable with Cloud Run to inject any secrets into your container at runtime.
+
+### Accessing Environment Variables in the Client
+Though this template uses Vite, I chose not to take advantage of `VITE_` build env-vars because changing them requires a rebuild, which means we can not dynamically change our env vars at runtime.
+
+Instead, our application queries for the exposed `publicEnv` variables which are served up from GraphQL. An example exists in the [repo source](./src/App.jsx).
+
+The reason this is my preferred way is that I will inject my secrets with Secret Manager. If I create a new version of my secrets, we can resync those secrets to the running container, without any downtime on the app.
+
+## Configuration
 
 For easier development, this template utlizies environment secrets with `dotenv`, which will require a `.env.<NODE_ENV>` file for each type of environment you'd like to utilize. This will require you to explicitly set your `NODE_ENV` either in the start command, or in the build step of a dockerfile:
 
@@ -98,10 +109,12 @@ All other environment variables should be declared in the project via `~/config/
 
 DO NOT hardcode secrets into your project.
 
-#### Tooling
+### Tooling
 
-This template uses a variety of development-only plugins and packages:
+This template uses the following plugins and packages:
 
 -- `graphql-hooks` - Super light-weight graphql tooling for the client. [link](https://github.com/nearform/graphql-hooks)<br>
 -- `Fastify` - The defactor standard for high-grade production APIs. [link](https://www.fastify.io/)<br>
 -- `Mercurius` - A GraphQL adapter for Fastify. [link](https://mercurius.dev/#/?id=install)<br>
+-- `ESLint` - eslint configuration is based off of `air-bnb`. 
+-- `Vite` - A fast and lean development experience. [link](https://vitejs.dev/guide/)
