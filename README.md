@@ -116,5 +116,5 @@ This template uses the following plugins and packages:
 -- `graphql-hooks` - Super light-weight graphql tooling for the client. [link](https://github.com/nearform/graphql-hooks)<br>
 -- `Fastify` - The defactor standard for high-grade production APIs. [link](https://www.fastify.io/)<br>
 -- `Mercurius` - A GraphQL adapter for Fastify. [link](https://mercurius.dev/#/?id=install)<br>
--- `ESLint` - eslint configuration is based off of `air-bnb`. 
+-- `ESLint` - eslint configuration is based off of `air-bnb`.<br>
 -- `Vite` - A fast and lean development experience. [link](https://vitejs.dev/guide/)
