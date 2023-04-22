@@ -31,6 +31,20 @@ INFO: Server listening at http://127.0.0.1:3456
 ```
 
 A window WILL NOT open on launch. Simply click the route, or enter the URL in your browser to open up the application. While running, all changes are hot-reloaded in the browser.
+
+### Test the app locally
+
+#### Curl
+Once running, you can `curl` a route on the server to observe Graphql working. If you start a server up on port 8080:
+
+```bash
+curl http://localhost:8080/r/example?name=<your_name>
+```
+
+You can visit the same URL in your browser to view the same result.
+
+
+
 ### Run in Production
 
 A production build is possible via a build command, as long you set `NODE_ENV=production` (see below on containers):
@@ -84,10 +98,10 @@ All other environment variables should be declared in the project via `~/config/
 
 DO NOT hardcode secrets into your project.
 
-#### Development Plugins
+#### Tooling
 
 This template uses a variety of development-only plugins and packages:
 
--- `nodemon` - For quickly restarting the development server after changes are saved.<br>
--- `pino-pretty` - Used as a plugin for Fastify logging to improve readability of request logs.<br>
--- `instance.printRoutes()` - When a server instance is started in `NODE_ENV=local`, prints a radix tree used by the router.<br>
+-- `graphql-hooks` - Super light-weight graphql tooling for the client. [link](https://github.com/nearform/graphql-hooks)<br>
+-- `Fastify` - The defactor standard for high-grade production APIs. [link](https://www.fastify.io/)<br>
+-- `Mercurius` - A GraphQL adapter for Fastify. [link](https://mercurius.dev/#/?id=install)<br>
