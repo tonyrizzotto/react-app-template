@@ -1,4 +1,5 @@
 import { useQuery } from 'graphql-hooks';
+import viteImage from '../../assets/vite.svg';
 
 const HELLO_QUERY = `
   query Hello($name: String!) {
@@ -17,6 +18,7 @@ export default function Home() {
 
   return (
     <div>
+      <img src={viteImage} alt="vite logo" style={{ width: '100px' }} />
       <br />
       <br />
       {!loading && (
