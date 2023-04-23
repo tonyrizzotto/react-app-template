@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
-import { BrowserRouter } from 'react-router-dom';
-import Routes from './RoutesList';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
+import routes from './routes';
 
 /*
   The `hydrated` prop is a sign the app has been loaded in the browser and it is
@@ -8,11 +11,10 @@ import Routes from './RoutesList';
   and the app will error out.
 */
 export default function Router({ hydrated }) {
+  const router = createBrowserRouter(routes);
   if (hydrated) {
     return (
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
+      <RouterProvider router={router} />
     );
   }
 

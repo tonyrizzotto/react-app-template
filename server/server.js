@@ -38,7 +38,7 @@ export default async function createServer({ environment }) {
   /*
     Renders the application via SSR
   */
-  server.get('/', (request, reply) => {
+  server.get('/*', (request, reply) => {
     reply.html(reply.render());
   });
 

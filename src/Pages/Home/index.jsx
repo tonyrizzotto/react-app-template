@@ -17,9 +17,15 @@ export default function Home() {
 
   return (
     <div>
+      <img src="../../assets/vite.svg" alt="vite logo" style={{ width: '100px' }} />
+      <br />
+      <br />
       {!loading && (
         `${data.hello}! Welcome to your Server-side Rendered React/Vite/Fastify Application!`
       )}
+      <br />
+      <br />
+      <a href="/blog">This could be your blog!</a>
     </div>
   );
 }
