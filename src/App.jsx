@@ -4,6 +4,10 @@ import { useSetEnvVarContext } from './contexts/envVarContext';
 import Router from './Routes';
 import { ENV_QUERY } from './queries';
 
+/*
+  `App` component is for anything used to initialize the application after the
+  document has loaded, or been `hydrated`, to the client.
+ */
 export default function App() {
   const [hydrated, setHydrated] = useState(false);
   const { setEnvVars } = useSetEnvVarContext();
