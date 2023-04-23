@@ -17,7 +17,6 @@ export default function Home() {
 
   return (
     <div>
-      <img src="../../assets/vite.svg" alt="vite logo" style={{ width: '100px' }} />
       <br />
       <br />
       {!loading && (
