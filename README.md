@@ -2,7 +2,7 @@
 
 This is a modern React Application Template that utilizes React 18, Vite, GraphQL, Fastify and is served via SSR. This template integrates beautifully with Google Cloud Run to provide a seemless CI/CD experience. [Set up your Cloud Run Application](https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build).
 
-The application can be viewed [here](https://react-app-template-medi3zdobq-uc.a.run.app/)
+The application can be viewed [here](https://react-app-template-iidphyjppa-uc.a.run.app/)
 ## How to Use
 
 After you have cloned the project with:
