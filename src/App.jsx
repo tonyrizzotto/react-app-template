@@ -20,7 +20,7 @@ export default function App() {
 
   // Aside from hydration, we only want the rerender the initial app if the ENV Query has finished.
   useEffect(() => {
-    if (!loading) setEnvVars(data.getPublicEnvVars);
+    if (hydrated && !loading) setEnvVars(data.getPublicEnvVars);
   }, [loading]);
 
   /*
@@ -30,7 +30,6 @@ export default function App() {
   if (!hydrated) {
     return null;
   }
-
   return (
     <Router hydrated={hydrated} />
   );
