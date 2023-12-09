@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'graphql-hooks';
+import { BrowserRouter } from 'react-router-dom';
 import { useSetEnvVarContext } from './contexts/envVarContext';
-import Router from './Routes';
+import Routing from './Routes';
+
 import { ENV_QUERY } from './queries';
 
 /*
@@ -31,6 +33,9 @@ export default function App() {
     return null;
   }
   return (
-    <Router hydrated={hydrated} />
+    <BrowserRouter>
+      <Routing hydrated={hydrated} />
+    </BrowserRouter>
+
   );
 }

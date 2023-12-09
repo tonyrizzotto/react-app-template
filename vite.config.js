@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   root: join(dirname(fileURLToPath(new URL(import.meta.url))), 'src'),
-  plugins: [react({ jsxRuntime: 'classic' })],
+  plugins: [react()],
   mode: 'production',
   build: {
     manifest: true,
